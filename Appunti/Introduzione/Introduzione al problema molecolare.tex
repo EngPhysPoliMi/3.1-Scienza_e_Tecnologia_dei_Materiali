@@ -1,0 +1,372 @@
+\documentclass[a4paper,10pt]{article}
+
+%------------------FORMATTAZIONE E LAYOUT + LINGUA (per evitare errori con hyperref)
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenx}
+\usepackage[english,italian]{babel}
+\usepackage{lmodern}
+%\usepackage[top=3cm, bottom=3cm, left=2.5cm, right=2.5cm]{geometry}
+
+% Rende il token @ attivo, questo è utile per ri-definire comandi come \aux@chap, nascosti di solito:
+\makeatletter
+
+%%%%%%%%%%%%%---DO NOT EDIT---%%%%%%%%%%%%%
+%
+% standard page settings, 					The new requirements
+%* \paperwidth=597.50787pt
+%* \paperheight=845.04684pt
+%* \textwidth=345.0pt 						%* \textwidth=425.0pt 			
+\textwidth=425.0pt
+%* \textheight=598.0pt						%* \textheight=635.0pt
+\textheight=635.0pt
+%* \oddsidemargin=54.0pt					%* \oddsidemargin=0.46pt
+\oddsidemargin=0.46pt
+%* \evensidemargin=54.0pt				%* \evensidemargin=27.0pt
+\evensidemargin=27.0pt
+%* \topmargin=17.0pt							%* \topmargin=-10.0pt
+\topmargin=-10.0pt
+%* \headheight=12.0pt						%* \headheight=13.0pt
+\headheight=14.0pt
+%* \headsep=25.0pt
+%* \topskip=10.0pt
+%* \footskip=30.0pt
+\footskip=40.0pt
+%* \marginparwidth=57.0pt				%* \marginparwidth=57.0pt
+\marginparwidth=57.0pt
+%* \marginparsep=11.0pt
+%* \columnsep=10.0pt
+%* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+%* \hoffset=0.0pt
+%* \voffset=0.0pt
+%* \mag=1000
+%* \@twocolumnfalse
+%* \@twosidefalse
+%* \@mparswitchfalse
+%* \@reversemarginfalse
+%* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+%
+%%%%%%%%%%%%%---DO NOT EDIT---%%%%%%%%%%%%%
+%
+
+%-------------------------LAYOUT E MODIFICHE
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% Reset chapter counter at every \c@part increase:
+\@addtoreset{chapter}{part}
+
+ % leaving blank the "author" environment:
+\author{}
+
+% Command for noun or textsc:
+\newcommand{\noun}[1]{\textsc{#1}}
+
+\def\chaptermark#1{%
+	\markboth{%
+		\ifnum \c@secnumdepth>\m@ne
+ 			Cap. \thechapter.\ 
+ 		\fi\MakeUppercase{#1}%
+ 	}{}%
+}
+
+\usepackage[unicode=true,
+ hypertexnames=false,
+ bookmarks=true,
+ bookmarksnumbered=true,
+ bookmarksopen=false,
+ breaklinks=false,
+ pdfborder={0 0 1},
+ backref=false, 
+ colorlinks=true%
+]{hyperref}
+\hypersetup{pdftitle={Introduzione al problema molecolare},
+ pdfauthor={Andrea Maiani},
+ linkcolor=blue, 
+ citecolor=green,
+ urlcolor=cyan, 
+ filecolor=red, 
+ pdfpagelayout=OneColumn, 
+ pdfnewwindow=true, 
+ pdfstartview=XYZ, 
+ plainpages=false%
+}
+
+%-------------------------GRAFICA
+% \usepackage{graphicx}
+% \usepackage{caption}
+% \usepackage{subcaption}
+% \usepackage{float}
+% \usepackage{wrapfig}
+%\usepackage{booktabs}
+% \usepackage{multirow}
+
+%\usepackage{color}
+% \usepackage[dvipsnames]{xcolor}
+
+%\usepackage{todonotes}
+%-----------------------MATEMATICA-----------------------
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fixmath}
+\usepackage{physics}
+%\usepackage{siunitx}
+%\sisetup{locale = FR}
+
+
+\newcommand*{\uuline}[1]{\underline{\underline{#1}}}
+
+\usepackage[version=4]{mhchem} 
+% \usepackage{listings}
+
+% Make numbering in the enumerate environment by letter rather than number
+\renewcommand{\labelenumi}{\alph{enumi}.}
+\numberwithin{equation}{section}
+
+\begin{document}
+\title{Introduzione al problema molecolare}
+\author{\noun{Andrea Maiani} , \noun{Andrea Giuseppe Landella}}
+\date{\today}
+\maketitle
+
+\section{Giustificazione classica degli orbitali}
+Il fallimento della meccanica classica nella spiegazione dei problemi molecolari è fondamentalmente una conseguenza del \textit{teorema di Erenshaw}. Quest'ultimo, infatti, afferma che non esistono configurazioni stabili di punti materiali la cui unica interazione è rappresentata dalle forze elettrostatiche.
+\par
+Un punto di equilibrio stabile è per definizione un punto in un campo di forze il cui gradiente è nullo e la cui divergenza è negativa. Nel caso elettrostatico il teorema di Gauss combinato alla definizione di potenziale fa sì che quest'ultimo sia soggetto all'equazione di Laplace:
+\begin{equation}
+\grad \vb{F}=q \grad \vb{E} = -q \nabla^2 V = \frac{\rho}{\epsilon_0} = 0 
+\end{equation}
+
+\par
+Generalizzando, un punto di equilibrio potrebbe anche essere considerato come un punto a gradiente nullo con divergenza nulla ma intorno al quale il campo rotea (ossia un punto di equilibrio stabile non asintoticamente). Anche questa possibilità non può verificarsi poiché il rotore del campo elettrostatico è anch'esso nullo per le equazioni di Maxwell.
+
+\par
+Come volevasi dimostrare, non esistono punti di equilibrio stabili per un insieme di cariche puntiformi. Restano da escludere le configurazioni dinamiche: qualsiasi configurazione che preveda cariche in movimento sarebbe instabile poiché esse irradierebbero energia dunque anche queste non possono giustificare la stabilità di una molecola. L'unica possibile spiegazione classica per la stabilità di una molecola come \ce{H^+_2} è ipotizzare che la carica dell'elettrone non sia localizzata ma, al contrario, sia considerabile una distribuzione di carica, ossia facendo cadere l'ipotesi che  $\rho$ sia nullo. Così facendo viene a cadere anche l'ipotesi del teorema di Erenshaw e sono possibili configurazioni stabili. Ovviamente questo va contro l'ipotesi che l'elettrone sia una particella puntiforme: per risolvere correttamente il problema è necessario l'utilizzo della meccanica quantistica.
+
+\section{Approssimazione adiabatica}
+
+\subsection{Processi adiabatici e non adiabatici}
+Supponiamo di avere un problema quantistico dipendente da alcuni parametri esterni, ad esempio di avere a che fare con un oscillatore armonico che dipende dalla costante elastica $k$ o di risolvere il problema di un atomo idrogenoide con numero atomico $Z$. Una volta risolta la TISE per il nostro problema e aver trovato i relativi autostati (supponiamo che lo spettro sia continuo e non degenere) supponiamo che il sistema si trovi in uno di questi autostati. A questo punto supponiamo che ci sia un processo esterno al sistema che causi una variazione di questi parametri, per esempio l'atomo idrogenoide decade e dunque $Z$ diminuisce oppure che l'oscillatore varii lentamente la sua costante elastica.
+Siamo di fronte a due processi che possono essere considerati notevolmente diversi
+\par
+Nell'atomo si ha una transizione molto rapida e praticamente istantanea: si può pensare che le autofunzioni del sistema varino istantaneamente, la funzione d'onda, al contrario, avrà un ``tempo caratteristico interno'' $T_i$ molto più grande e dunque resterà sostanzialmente immutata, la variazione degli autostati farà si che questa sarà descritta da una nuova serie di coefficienti:
+\begin{equation}
+\ket{\psi(t_0)} = \sum_i \ket{\psi_i}\bra{\psi_i}\ket{\psi(t_0)}
+\end{equation}
+Ovviamente non essendo più uno stato stazionario comparirà un termine d'interferenza e una dipendenza dal tempo di $\abs{\psi}^2$.
+Questo tipo di processo in cui la variazione delle condizioni avviene in un ``tempo caratteristico esterno`` $T_e << T_i$ e che è possibile descrivere come la variazione istantanea degli autostati mentre la funzione d'onda non varia è detto \textit{processo non adiabatico}.
+
+Al contrario se immaginamo un oscillatore armonico con costante elastica $k$ che varia molto lentamente, ossia con un $T_e>>T_i$ possiamo ipotizzare che la funzione d'onda riesca a rispondere istantaneamente alla variazione e rimanga descritta dallo stesso autostato una volta modificato per rispondere al nuovo valore del parametro $k$.
+Questo tipo di processo è detto \textit{processo adiabatico} (anche se concettualmente è più simile alla definizione termodinamica di trasformazione quasi-statica). Si noti come mentre in un processo non adiabatico il valore atteso dell'energia si conservi questo non è vero per un processo adiabatico.
+
+\subsection{Teorema adiabatico}
+Se l'hamiltoniana dipende dal tempo l'equazione agli autovalori per l'hamiltoniana diventa:	
+\begin{equation}
+\label{eq:sec}
+\hat{H}(t) \psi_n(t) = E_n(t) \psi_n(t)
+\end{equation}
+
+Ricordiamo che però le autofunzioni, sebbene dipendenti dal tempo, rimangono tutte ortonormali tra loro istante per istante, ossia: $\bra{\psi_n(t)}\ket{\psi_n(t)}=\delta_{nm}$. Dunque la funzione d'onda resta anch'essa una combinazione lineare di esse ma con fattori che dipendono dal tempo:
+\begin{equation}
+\Psi(t) = \sum_n c_n(t)\psi_n(t)e^{i\theta_n(t)}
+\end{equation}
+
+dove si è introdotta una generalizzazione del fattore di fase:
+\begin{equation}
+\label{eq:phas}
+\theta_n(t) := -\frac{1}{\hbar} \int_0^t E_n(\tau)\dd\tau
+\end{equation}
+
+Sostituiamo l'equazione appena scritto all'interno dell'equazione di Schr\"odinger:
+\begin{equation}
+i\hbar \pdv{\Psi(t)}{t} = \hat{H}(t)\Psi(t)  
+\end{equation}
+\begin{equation}
+i\hbar \sum_n \left[\dot{c_n}\psi_n+c_n\dot{\psi_n}+ic_n\psi_n\dot{\theta_n} \right]e^{i\theta_n} = \sum_n c_n \hat{H}(t)\psi_n(t)e^{i\theta_n}  
+\end{equation}
+
+Grazie a \eqref{eq:sec} e \eqref{eq:phas} gli ultimi due termini si cancellano e portano a:
+\begin{equation}
+i\hbar \sum_n \dot{c_n}\psi_n e^{i\theta_n}= -\sum_n c_n\dot{\psi_n} e^{i\theta_n}
+\end{equation}
+
+Ora eseguiamo il prodotto scalare con le stesse autofunzioni e invochiamo l'ortonormalità istantanea, si arriva all'espressione:
+\begin{equation}
+\dot{c}_m(t) = -\sum_n c_n \bra{\psi_m}\ket{\dot{\psi}_n}e^{i(\theta_n-\theta_m)}
+\end{equation}
+
+Riprendiamo ora l'equazione agli autovalori per l'hamiltoniana e deriviamola rispetto al tempo, quindi facciamo il prodotto scalare con un generico autostato:
+\begin{equation}
+\label{eq:c}
+\bra{\psi_m}\dot{H}\ket{\psi_n} + \bra{\psi_m}H\ket{\dot{\psi}_n} = \dot{E}_n\bra{\psi_m}\ket{\psi_n} + E_n \bra{\psi_m}\ket{\dot{\psi}_n}
+\end{equation}
+
+Per $n\neq m$ si ottiene
+\begin{equation}
+\bra{\psi_m}\dot{H}\ket{\psi_n} = (E_n - E_m) \bra{\psi_m}\ket{\dot{\psi}_n}
+\end{equation}
+
+Combiniamo questo risultato con quello nell'equazione \eqref{eq:c} per ottenere la seguente equazione esatta:
+\begin{equation}
+\dot{c}_m(t) = -c_m\bra{\psi_m}\ket{\dot{\psi}_m}-\sum_{n\neq m} c_n \frac{\bra{\psi_m}\dot{H} \ket{\dot{\psi}_n}}{(E_n-E_m)} e^{i(\theta_n-\theta_m)}
+\end{equation}
+
+L'approssimazione adiabatica consiste ora nel supporre che $\dot{H}$ sia molto piccolo e dunque trascurabile, ne consegue che:
+\begin{equation}
+\dot{c}_m(t) = -c_m\bra{\psi_m}\ket{\dot{\psi}_m}
+\end{equation}
+
+Questa equazione differenziale ha soluzione:
+\begin{equation}
+c_m(t) = c_m(0) e^{i\gamma_m(t)}
+\end{equation}
+
+dove:
+\begin{equation}
+\gamma_m(t) := i \int_0^t \bra{\psi_m}\ket{\dot{\psi}_m} \dd \tau
+\end{equation}
+
+E come descritto qualitativamente prima, la funzione d'onda evolve secondo l'equazione:
+\begin{equation}
+\Psi(t) = \sum_m c_m \psi_m(t) e^{i\theta_m(t)}e^{i\gamma_m(t)}
+\end{equation}
+
+I coefficienti che descrivono la funzione d'onda sulla base degli autostati del sistema rimangono gli stessi poiché i nuovi fattori $e^{i\theta_m(t)} e^{i\gamma_m(t)}$ sono a norma unitaria e non hanno dunque significato fisico. Il modulo quadro della funzione d'onda resta rappresentato dagli stessi coefficienti $\abs{c_m}^2$ determinati a $t=0$. Infatti:
+
+\begin{equation}
+\abs{\Psi(t)}^2 = \bra{\Psi}\ket{\Psi} = \sum_m \abs{c_m}^2 \abs{ \psi_m(t)}^2 
+\end{equation}
+
+
+\section{Approssimazione di Born-Oppenheimer}
+\textit{
+NB: Nella trattazione si utilizza la seguente notazione: le coordinate nucleari e le rispettive masse si indicano con $R_\alpha$ e $M_\alpha$, mentre le coordinate degli elettroni si indicano con $r_i$. Si avranno quindi lettere maiuscole ed indici in lettere greche per i nuclei, mentre lettere minuscole ed indici in lettere latine per gli elettroni. Quando omettiamo l'indice come in $\vb{R}$ o $\vb{r}$ intendiamo il set completo di coordinate cartesiane dei nuclei o degli elettroni. Infine, nell'indicare una funzione del tipo $f(a,b;c,d)$ si utilizzerà il punto e virgola per separare le variabili dai parametri.
+}
+\bigskip
+\par
+La soluzione analitica dell'equazione di Schr\"odinger per il problema molecolare non è possibile, anche la soluzione numerica presenta notevoli difficoltà se non si compiono le dovute approssimazioni. L'approssimazione fondamentale è dovuta a Born ed Oppenheimer e consiste nel separare gli autospazi delle coordinate nucleari e delle coordinate elettroniche, così facendo siamo di fronte a due problemi separati. Nel problema elettronico le coordinate dei nuclei sono un parametro esterno al sistema, solitamente introdotto per via empirica. Al variare delle coordinate nucleari varieranno le autofunzioni del sistema molecolare ma, supponendo di rimanere nel campo dell'approssimazione adiabatica, il sistema non cambierà configurazione ma si adatterà al nuovo autostato.
+Una volta risolto il problema elettronico, si possono utlizzare i risultati ottenuti per ricavare il potenziale agente sui nuclei e giustificare così a posteriori le coordinate introdotte inizialmente per via empirica.
+\par
+Questa approssimazione perde accuratezza e non descrive più i sistemi reali quando si verificano processi diabatici, ovvero quando il cambiamento della configurazione nucleare (e di conseguenza il cambiamento delle autofunzioni elettroniche) è così rapido che la funzione d'onda elettronica non riesce ad adattarsi e si verifica una transizione elettronica.
+
+\bigskip
+\par
+Poniamo l'hamiltoniana completa del problema molecolare:
+\begin{equation}
+\hat{H} = -\sum_i \frac{\hbar^2}{2m_i} \nabla_i^2 %
+					-\sum_\alpha \frac{\hbar^2}{2M_\alpha} \nabla^2_\alpha %
+					-\sum_{\alpha,i} \frac{Z_\alpha e^2}{4 \pi \epsilon_0 r_{\alpha i}} %
+					+\sum_{\alpha>\beta} \frac{Z_\alpha Z_\beta e^2}{4\pi\epsilon_0 R_{\alpha\beta}} %
+					+\sum_{i>j} \frac{e^2}{4 \pi \epsilon_0 r_{ij}}
+\end{equation}
+
+In forma operatoriale è possibile identificare ciascun termine con il rispettivo significato fisico:
+\begin{equation}
+\hat{H} = \hat{T}_e (\vb{r}) + \hat{T}_N (\vb{R}) + \hat{V}_{eN} (\vb{r}, \vb{R}) + \hat{V}_{NN}(\vb{R}) + \hat{V}_{ee}(\vb{r})
+\end{equation}
+
+La presenza del termine $\hat{V}_{eN}$ ci impedisce di separare $\hat{H}$ in parte nucleare ed elettronica, tuttavia è possibile imporre una separazione parametrica: si suddivide la funzione d'onda globale $\Psi$ come prodotto di due autofunzioni o fattori. Il primo fattore è elettronico $\psi$, che dipende sia dalle coordinate elettroniche $\vb{r}$ che da un generico set di coordinate nucleari $\vb{R}$ già note o assunte in prima approssimazione (quindi parametrizzate). Il secondo fattore è la parte rotovibrazionale nucleare $\Phi$, che dipende solo dal set di coordinate nucleari $\vb{R}$:
+\begin{equation}
+\Psi(\vb{r},\vb{R}) = \psi(\vb{r}; \vb{R}) \Phi(\vb{R})
+\end{equation}
+
+Procediamo partizionando l'hamiltoniana del problema definendo un opportuno operatore hamiltoniano elettronico $\hat{H}_{e}$. Questo operatore sebbene operi solo sul sottospazio delle configurazioni elettroniche deve includere anche il termine $\hat{V}_{eN}$ che contiene termini in $\vb{R}$. Questo significa che l'operatore $\hat{H}_e$ dipenderà parametricamente dalle coordinate dei nuclei.
+\begin{equation}
+\hat{H}_{e} = \hat{T}_e (\vb{r}) + \hat{V}_{eN} (\vb{r}; \vb{R}) + \hat{V}_{ee}(\vb{r})
+\end{equation}
+
+Una volta definito questo operatore si procede risolvendo \textit{Time Independent Scrh\"odinger Equation} (d'ora in poi TISE) per l'hamiltoniana elettronica trovando rispettivi autofunzioni e autovalori in funzione dei parametri $\vb{R}$.
+\begin{equation}
+\hat{H}_{e} \psi(\vb{r}; \vb{R}) = E_e \psi(\vb{r}; \vb{R})
+\end{equation}
+
+Il problema appena risolto è anche detto \textit{clamped nuclei problem} proprio perché sia l'operatore che le sue autofunzioni e autovalori dipendono dalle coordinate dei nuclei che sono considerate fissate a priori. Una volta calcolate le autofunzioni queste possono essere utilizzare per ricomporre la funzione d'onda totale. Supponiamo di essere interessati a descrivere la configurazione elettronica del \textit{ground state} avente energia $E_{g}$. Questa sarà definita in funzione delle coordinate nucleari e per determinare quale essa sia sarà necessario, fissate le coordinate $\vb{R}$, trovare l'autofunzione del minimo autovalore $E_{g}$, ovvero in termini computazionali:
+
+\begin{equation}
+E_g (\vb{R}) = \min_{n} \bra{\psi_n(\vb{r}; \vb{R})} \hat{H}_{e} \ket{\psi_n(\vb{r}; \vb{R})} = \min_n E_n(\vb{R})
+\end{equation}
+
+Variando $\vb{R}$ e risolvendo di volta in volta l'equazione di Scr\"odinger si può ottenere la funzione  $E_{g}(\vb{R})$ che è chiamata \textit {Potential Energy Surface} (PES) della molecola. A questo punto si dispone di un set di autofunzioni di ground elettroniche per ogni configurazione nucleare, tuttavia, siccome non possono essere definiti dei vincoli alle configurazioni $\vb{R}$ a priori, come anticipato queste coordinate nucleari iniziali devono essere fissate arbitrariamente e a tal fine solitamente si utilizzano dati provenienti da misure empiriche.
+
+Risolto il problema elettronico tramite il metodo appena descritto, si può passare al problema vibrazionale. Ora però non possiamo semplicemente prendere ciò che resta dell'hamiltoniana (ossia $\hat{T}_N$ e $\hat{V}_{NN}$ ) poiché non ci sarebbe nessun potenziale negativo che stabilizzi il sistema, è infatti l'azione degli elettroni che rende il complesso di atomi stabile e non è possibile trascurare il loro effetto. Dobbiamo quindi cercare le soluzioni del problema molecolare completo sfruttando le soluzioni elettroniche che abbiamo trovato precedentemente. 
+\par
+Procediamo quindi valutando l'azione di ognuno dei tre operatori sulla funzione d'onda totale. Partiamo dal termine $\hat{V}_{NN}$: essendo esso un operatore moltiplicativo è possibile scrivere semplicemente:
+\begin{equation}
+\hat{V}_{NN}(\psi \Phi) = \Phi \hat{V}_{NN} \psi
+\end{equation}
+
+\par
+Passiamo al termine $\hat{T}_N$ e prestiamo attenzione perché l'approssimazione di Born-Oppenheimer propriamente detta entra in gioco adesso: fino ad ora infatti tutti i risultati che abbiamo ottenuto sono esatti, sebbene parziali. 
+\begin{equation}
+\hat{T}_N (\psi \Phi) = - \sum_\alpha \frac{\hbar^2}{2M_\alpha} \nabla^2_\alpha (\psi \Phi) 
+\end{equation}
+Applichiamo la regola di Liebeniz per la derivata seconda:
+\begin{equation}
+-\sum_\alpha \frac{\hbar^2}{2M_\alpha} \left( \psi \nabla^2_\alpha \Phi + 2 \grad_\alpha \phi\cdot\grad_\alpha\psi + \Phi \nabla^2_\alpha \psi \right) 
+\end{equation}
+
+Mentre l'operatore energia potenziale non agisce sulla funzione d'onda eletronica, quest'ultima ha una dipendenza parametrica dalle coordinate nucleari $R_\alpha$ e dunque l'operatore energia cinetica (che è invece un operatore differenziale) ha effetto. L'approssimazione di Born-Oppenheimer consiste nel trascurare l'azione dell'operatore $\hat{T}_N$ su $\psi$ assumendo dunque che:
+\begin{equation}
+\hat{T}_N (\psi \Phi) \stackrel{BO}{\simeq} - \sum_\alpha \frac{\hbar^2}{2M_\alpha} \psi \nabla^2_\alpha \Phi = \psi \hat{T}_n \Phi
+\end{equation}
+È possibile dimostrare matematicamente che questa sia una buona approssimazione calcolando una stima della grandezza dei termini trascurati, intuitivamente è possibile giustificare questa approssimazione notando che perché $ \left< \hat{T}_N \right>  \ll \left< \hat{T}_e \right>$ in quanto $m_N \gg m_e$. 
+
+L'hamiltoniana del problema vibrazionale può dunque essere scritta come:
+\begin{align}
+\hat{H}(\psi\Phi) &= \left[ \hat{T}_N  + \hat{V}_{NN} +\hat{H}_e\right]\psi\Phi  \\
+&=  \hat{T}_N\psi\Phi  + \hat{V}_{NN}\psi\Phi +\hat{H}_e\psi\Phi \stackrel{BO}{\simeq} 
+\psi\left[\hat{T}_N\Phi  + \hat{V}_{NN}\Phi +E_g(R)\Phi\right ] = E_{mol} \psi \Phi
+\end{align}
+
+Ossia semplificando la $\psi$:
+\begin{equation}
+\left[\hat{T}_N  + \hat{V}_{NN} +E_g(R)\right]\Phi = E_{mol} \Phi
+\end{equation}
+
+
+Le equazioni agli autovalori nell'approssimazione di Born-Oppenheimer sono quindi:
+\begin{equation}
+\begin{cases}
+\left[\hat{T}_e(\vb{r}) + \hat{V}_{ee}(\vb{r}) + \hat{V}_{eN}(\vb{r},\vb{\bar{R}})\right] \psi(\vb{r},\vb{\bar{R}}) =E_g(\vb{\bar{R}}) \psi(\vb{r},\vb{\bar{R}}) \\
+\left[\hat{T}_N(\vb{R}) + \hat{V}_{NN}(\vb{R}) + \hat{E}_g(\vb{R})\right] \Phi(\vb{R}) = E_{mol} \Phi(\vb{R})
+\end{cases}\to\quad \Psi = \psi(\vb{r},\vb{\bar{R}})\Phi(\vb{R})
+\end{equation}
+
+si nota che il minimo valore dell'energia vibrazionale non corrisponde a zero, bensì esso si accoppia con la minima energia potenziale per dare la \textit{Zero Poin Energy} (ZPE) della molecola. 
+\par
+In questo caso $\vb{\bar{R}}$ sono le coordinate nucleari di equilibrio che sono stavolta ricavate minimizzando $E_{mol}$ fornendo così uno strumento per verificare la bontà dell'ipotesi sulle coordinate nucleari di partenza.
+
+\section{Problema vibrazionale classico}
+\subsection{Teorema di Hellmann-Feynmann}
+Sia $\psi$ un autostato di un problema con operatore hamiltoniano $\hat{H}_f$ dipendente da un parametro continuo $f$. L'energia di questo autostato sarà:
+\begin{equation}
+E = \bra{\psi}\hat{H}_f\ket{\psi}
+\end{equation}
+
+Calcoliamo ora la derivata dell'energia rispetto a questo parametro:
+\begin{equation}
+\pdv{E}{f} =  \matrixel{\pdv{\psi}{f}}{\hat{H}_f}{\psi}+ \matrixel{\psi}{\pdv{\hat{H}_f}{f}}{\psi}+ \matrixel{\psi}{\hat{H}_f}{\pdv{\psi}{f}}
+\end{equation}
+
+Ricordando l'hermitianeità dell'operatore hamiltoniano possiamo scrivere:
+\begin{equation}
+\pdv{E}{f} =  E\left(\bra{\pdv{\psi}{f}}\ket{\psi}+ \bra{\psi}\ket{\pdv{\psi}{f}}\right) + \bra{\psi}\pdv{\hat{H}_f}{f}\ket{\psi} = E\pdv{}{f}\bra{\psi}\ket{\psi} + \bra{\psi}\pdv{\hat{H}_f}{f}\ket{\psi} 
+\end{equation}
+
+Siccome il primo termine è nullo non resta che:
+\begin{equation}
+\pdv{E}{f} = \bra{\psi}\pdv{\hat{H}_f}{f}\ket{\psi} 
+\end{equation}
+
+\subsection{Forze classiche agenti sui nuclei}
+Il teorema di Hellmann-Feynmann è il punto di partenza per una trattazione classica o quantistica approssimata del problema vibrazionale. Le forze elettrostatiche infatti non sono sufficienti a descrivere la molecola dal momento che l'elettrone è delocalizzato: alle forze repulsive  tra i nuclei dobbiamo sommare il contributo elettrostatico degli elettroni che lo bilanci fino al raggiungimento del punto di equilibrio. Questa forza può essere calcolata a partire dal suddetto teorema: ipotizziamo che $\psi_g(\vb{r};\vb{R})$ sia l'autostato di ground del problema elettronico descritto da $\hat{H}_e$ e che l'autovalore dell'energia elettronica sia $E_g$. Applicando il teorema di Hellmann-Feynmann all'autostato usando come parametro esterno la posizione dei nuclei otteniamo:
+
+\begin{equation}
+\pdv{E_g}{\vb{R}} = \bra{\psi_g}\pdv{\hat{H}_e}{\vb{R}}\ket{\psi_g}
+\end{equation}
+
+Ricordiamo ora che l'antigradiente dell'energia è una forza e che solo la parte potenziale dell'hamiltoniano dipende dalle coordinate nucleari $\vb{R}$:
+\begin{equation}
+\vb{F} = - \pdv{E_g}{\vb{R}} = - \bra{\psi_g}\pdv{\hat{V}_e}{\vb{R}}\ket{\psi_g}
+\end{equation}
+Questo risultato è il punto di partenza per una trattazione sia classica che analitica del problema vibrazionale della molecola, ossia la descrizione del moto dei nuclei una volta fissata la configurazione elettronica. È inoltre possibile sfruttare questo risultato per verificare la correttezza dei potenziali empirici tramite calcoli \textit{ab initio}.
+
+\end{document}
