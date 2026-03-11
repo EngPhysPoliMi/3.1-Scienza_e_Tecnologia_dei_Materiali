@@ -1,6 +1,6 @@
-# x.y - Template
+# 3.1 - Scienza e Tecnologia dei Materiali
 
-Repository for "Template".
+Repository for "Scienza e Tecnologia dei Materiali".
 
 
 ## Use instructions
